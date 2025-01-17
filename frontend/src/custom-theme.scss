@@ -1,0 +1,167 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use "@angular/material" as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+$orange-palette: (
+  50: #fef3e0,
+  100: #fce0b3,
+  200: #fbcc81,
+  300: #fab74f,
+  400: #f9a729,
+  500: #f89908,
+  600: #f48d06,
+  700: #ee7d04,
+  800: #e86e02,
+  900: #df5401,
+  A100: #fce0b3,
+  A200: #fbcc81,
+  A400: #f9a729,
+  A700: #ee7d04,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(black, 0.87),
+    A200: rgba(black, 0.87),
+    A400: white,
+    A700: white,
+  ),
+);
+
+$bright-navy-blue-palette: (
+  50: #e2f4f7,
+  100: #b6e4ec,
+  200: #8ad1e1,
+  300: #66bfd6,
+  400: #50b2d0,
+  500: #3fa5ca,
+  600: #3898bd,
+  700: #2e86ab,
+  800: #2b7598,
+  900: #205676,
+  A100: #b6e4ec,
+  A200: #8ad1e1,
+  A400: #50b2d0,
+  A700: #2e86ab,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(black, 0.87),
+    A200: rgba(black, 0.87),
+    A400: white,
+    A700: white,
+  ),
+);
+
+$navy-blue-palette: (
+  50: #e6eaf0,
+  100: #bfcbdc,
+  200: #97a9c3,
+  300: #6f88ab,
+  400: #4f6f9b,
+  500: #2b578d,
+  600: #234f84,
+  700: #1a4679,
+  800: #133c6c,
+  900: #0d2c54,
+  A100: #bfcbdc,
+  A200: #97a9c3,
+  A400: #4f6f9b,
+  A700: #1a4679,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(black, 0.87),
+    A200: rgba(black, 0.87),
+    A400: white,
+    A700: white,
+  ),
+);
+
+$crimson-palette: (
+  50: #f9e8ea,
+  100: #f0c7ca,
+  200: #d7908e,
+  300: #c46864,
+  400: #c84942,
+  500: #c73928,
+  600: #ba3127,
+  700: #a92822,
+  800: #9c231c,
+  900: #8c1b13,
+  A100: #f0c7ca,
+  A200: #d7908e,
+  A400: #c84942,
+  A700: #a92822,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(black, 0.87),
+    A200: rgba(black, 0.87),
+    A400: white,
+    A700: white,
+  ),
+);
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$frontend-primary: mat.define-palette($orange-palette, 600, 300, 900);
+$frontend-accent: mat.define-palette($bright-navy-blue-palette, 700, 300, 900);
+$frontend-secondary: mat.define-palette($navy-blue-palette, 900, 700, 400);
+// The warn palette is optional (defaults to red).
+$frontend-warn: mat.define-palette($crimson-palette, 900);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$frontend-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $frontend-primary,
+      accent: $frontend-accent,
+      warn: $frontend-warn,
+      secondary: $frontend-secondary,
+    ),
+  )
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($frontend-theme);
