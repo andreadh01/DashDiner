@@ -1,0 +1,68 @@
+<form [formGroup]="opcionGroup" class=" px-6 py-4 overflow-y-auto">
+  <h1 class="text-xl font-bold text-orange-600 mb-2">{{title}}</h1>
+  <div class="flex gap-5 ">
+    <mat-form-field appearance="outline" class="w-full border-none">
+      <mat-label>Nombre de la opción</mat-label>
+      <input required="true" matInput placeholder="" formControlName="titulo">
+    </mat-form-field>
+  </div>
+
+  <mat-form-field appearance="outline" class="w-full border-none">
+    <mat-label>Tipo de selección</mat-label>
+    <mat-select formControlName="multiple" class="border-none">
+      <mat-option [value]="true">
+        Múltiple
+      </mat-option>
+      <mat-option [value]="false">
+        Única
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+
+  <mat-divider class="mb-6"></mat-divider>
+
+  <div>
+
+    <button (click)="agregarSeleccion()" mat-raised-button color="primary" class="text-white rounded-lg mb-4"><mat-icon
+        iconPositionEnd>add_circle_outline</mat-icon>Agregar
+      selección</button>
+
+
+
+    <div *ngFor="let seleccion of seleccionGroup.controls; let i = index"
+      class="grid grid-cols-2 md:flex md:justify-between gap-3 my-3">
+
+      <button [ngClass]="{'text-white pointer-events-none	': i == 0}"
+        (click)="eliminarSeleccion(i,seleccion.get('id')?.value)" class="hidden md:block" mat-icon-button><mat-icon
+          [ngClass]="{'text-white pointer-events-none	': i == 0}"
+          class="text-orange-600 ">remove_circle_outline</mat-icon></button>
+      <mat-form-field appearance="outline" class="border-none text-sm md:text-base md:min-w-fit -mb-[1.25em]">
+        <mat-label>Nombre de selección</mat-label>
+        <input required="true" matInput placeholder="" [formControl]="getControl(i,'nombre')">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="border-none text-sm md:text-base md:min-w-fit -mb-[1.25em]">
+        <mat-label>Precio extra</mat-label>
+        <input required="true" matInput placeholder="" [formControl]="getControl(i,'precio')">
+      </mat-form-field>
+      <mat-slide-toggle [formControl]="getControl(i,'estado')" color="primary"
+        class="border-none md:block hidden"></mat-slide-toggle>
+      <button [ngClass]="{'text-white pointer-events-none	': i == 0}"
+        (click)="eliminarSeleccion(i,seleccion.get('id')?.value)" mat-flat-button
+        class="text-orange-600 md:hidden justify-self-start"><mat-icon
+          [ngClass]="{'text-white pointer-events-none	': i == 0}"
+          class="text-orange-600">remove_circle_outline</mat-icon>Eliminar</button>
+      <mat-slide-toggle [formControl]="getControl(i,'estado')" color="primary"
+        class="border-none md:hidden justify-self-end"></mat-slide-toggle>
+
+    </div>
+  </div>
+  <div mat-dialog-actions class="flex gap-4 justify-end mr-4">
+    <button mat-raised-button type="submit" color="primary" class="text-white" (click)="guardar()">Confirmar</button>
+    <a (click)="closeModal()" mat-stroked-button color="primary">Cerrar</a>
+    <!-- <button mat-raised-button [mat-dialog-close]="closemessage" color="accent">Cancel</button> -->
+  </div>
+</form>
+
+<app-mensaje *ngIf="mensaje" (visible)="mensaje = null" tipo="{{mensaje.tipo}}"
+  contenido="{{mensaje.contenido}}"></app-mensaje>

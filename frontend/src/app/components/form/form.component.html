@@ -1,0 +1,103 @@
+<form [formGroup]="this.form" (ngSubmit)="guardar()" class="py-8 px-4 xl:px-12 max-h-[80vh] overflow-y-auto">
+  <div class="flex justify-between mb-2">
+    <h1 class="text-2xl font-bold text-orange-600">{{datos.title}}</h1>
+    <button mat-raised-button color="primary" type="button" [disabled]="!productoGuardado"
+      class="text-sm text-white rounded-lg py-5 items-center min-w-fit hidden lg:flex" (click)="openModal(0)">Agregar
+      opción<mat-icon iconPositionEnd>add_circle_outline</mat-icon></button>
+
+  </div>
+
+  <div class="flex flex-col lg:flex-row gap-2 xl:gap-8 ">
+    <div class="flex flex-col  md:px-24 lg:px-0">
+
+      <img [src]="url.url" class="xl:max-w-[350px] max-w-[300px] rounded-xl self-center" />
+
+
+      <label for="files"
+        class="cursor-pointer	self-center my-4 bg-white hover:bg-orange-50 border border-gray-300 text-orange-600 py-2 px-4 rounded-xl max-w-fit">Seleccionar
+        imagen</label>
+      <input id=files type="file" (change)="onSelectFile($event)" class="hidden" placeholder="Seleccione la imagen"
+        accept="image/*" />
+      <mat-form-field appearance="outline" class="w-full border-none">
+        <mat-label>Nombre de producto</mat-label>
+        <input required="true" matInput placeholder="" formControlName="nombre">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="w-full border-none">
+        <mat-label>Precio</mat-label>
+        <input required="true" matInput placeholder="" type="number" formControlName="precio">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="w-full border-none">
+        <mat-label>Descripcion</mat-label>
+        <textarea required="true" matInput placeholder="" formControlName="descripcion"></textarea>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-full border-none">
+        <mat-label>Categoría</mat-label>
+        <mat-select formControlName="id_categoria" class="border-none">
+          <mat-option [value]="c.id" *ngFor="let c of categorias">
+            {{c.nombre}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div class="flex items-center justify-between mb-2">
+        <mat-label class="text-gray-700">¿El producto está activo?</mat-label>
+        <mat-slide-toggle formControlName="estado" color="primary" class="border-none"></mat-slide-toggle>
+
+      </div>
+      <div class="flex items-center justify-between">
+        <mat-label class="text-gray-700">¿El producto es una promoción?</mat-label>
+        <mat-slide-toggle formControlName="promocion" color="primary" class="border-none"></mat-slide-toggle>
+
+      </div>
+    </div>
+
+    <mat-divider class="lg:hidden lg:my-0 my-4"></mat-divider>
+    <div class="flex flex-col lg:max-h-full w-full lg:overflow-y-auto xl:px-10 gap-6 md:px-6">
+      <button mat-raised-button color="primary" type="button" [disabled]="!productoGuardado"
+        class="text-sm text-white rounded-lg py-5 items-center max-w-fit self-end m-0 lg:hidden"
+        (click)="openModal(0)">Agregar
+        opción<mat-icon iconPositionEnd>add_circle_outline</mat-icon></button>
+      <div class="m-2" *ngFor="let opcion of opciones; let i = index">
+        <p class="font-semibold text-md px-4">OPCIÓN {{i+1}}</p>
+        <div class="shadow-lg rounded-sm flex flex-col p-4 gap-4">
+          <div class="flex justify-between">
+            <div>
+              <p class=" font-bold text-md">Título de la opción</p>
+              <p class=" text-xl">{{opcion.titulo}}</p>
+            </div>
+            <div class="flex flex-col md:flex-row">
+              <button (click)="openModal(opcion.id)" mat-icon-button type="button"><mat-icon
+                  class="text-orange-600 ">edit</mat-icon></button>
+              <button (click)="eliminar(i, opcion.id)" mat-icon-button type="button"><mat-icon
+                  class="text-orange-600 ">delete</mat-icon></button>
+            </div>
+
+          </div>
+          <div>
+            <p class=" font-bold  text-md">Tipo de selección</p>
+            <p class="text-xl">{{opcion.multiple ? 'Múltiple' : 'Única'}}</p>
+          </div>
+          <p class=" font-bold  text-md">Selecciones disponibles</p>
+          <div class="flex justify-between " *ngFor="let seleccion of opcion.selecciones_disponibles">
+            <p class="text-xl">{{seleccion.nombre}}</p>
+            <div class="flex gap-8 justify-between">
+              <p class="text-sm text-start">+ ${{decimal(seleccion.precio)}}</p>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div mat-dialog-actions class="flex gap-4 justify-end mr-4">
+    <button mat-raised-button type="submit" color="primary" class="text-white">Confirmar</button>
+    <a (click)="closeModal()" mat-stroked-button color="primary">Cerrar</a>
+    <!-- <button mat-raised-button [mat-dialog-close]="closemessage" color="accent">Cancel</button> -->
+  </div>
+</form>
+<app-mensaje *ngIf="mensaje" (visible)="mensaje = null" tipo="{{mensaje.tipo}}"
+  contenido="{{mensaje.contenido}}"></app-mensaje>

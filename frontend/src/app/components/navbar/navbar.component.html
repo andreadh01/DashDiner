@@ -1,0 +1,47 @@
+<div class="px-4 md:px-16 py-5 flex justify-between max-w-screen	">
+  <app-logo />
+  <app-searchbar class="grow hidden md:block" />
+  <div class="flex justify-around items-center gap-3">
+
+    <button *ngIf="!logeado" mat-button (click)="redirect('login')"
+      class="text-orange-600 font-medium	text-xs flex items-center gap-1 "> <mat-icon
+        color="primary">account_circle</mat-icon>Ingresar</button>
+
+    <button *ngIf="logeado && tipo=='admin' || tipo=='cocina'" mat-button (click)="cuenta()"
+      class="text-orange-600 font-medium	text-xs flex items-center gap-1 "> <mat-icon
+        color="primary">account_circle</mat-icon>Mi cuenta</button>
+
+    <div *ngIf="logeado && tipo=='cliente'">
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu" class="text-xs">
+        <button mat-menu-item (click)="redirect(id+'/pedidos')">
+          <mat-icon>list_alt</mat-icon>
+          <span>Mis pedidos</span>
+        </button>
+        <button mat-menu-item (click)="redirect(id+'/favoritos')">
+          <mat-icon>favorite</mat-icon>
+          <span>Mis favoritos</span>
+        </button>
+        <button mat-menu-item (click)="redirect(id+'/cuenta')">
+          <mat-icon>account_circle</mat-icon>
+          <span>Mi cuenta</span>
+        </button>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          <span>Cerrar sesión</span>
+        </button>
+      </mat-menu>
+    </div>
+    <mat-divider [vertical]="true" class="h-1/2"></mat-divider>
+    <button mat-flat-button class="text-gray-600" (click)="redirect('carrito')"><mat-icon
+        class="m-0">shopping_cart</mat-icon>
+      <div *ngIf="count>0"
+        class="absolute inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-orange-500 rounded-full bottom-0 -right-3">
+        {{count}}</div>
+
+    </button>
+  </div>
+
+</div>

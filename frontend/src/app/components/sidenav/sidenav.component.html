@@ -1,0 +1,60 @@
+<mat-sidenav-container>
+  <mat-sidenav #drawer fixedInViewport="true" [attr.role]="isMobileLayout ? 'dialog' : 'navigation'"
+    [mode]="isMobileLayout ? 'over' : 'side'" [opened]="!isMobileLayout" class="mat-elevation-z7"
+    [ngClass]="isExpanded ? 'w-[240px]' : 'w-[80px]'">
+
+    <mat-toolbar class="bg-white flex justify-between	 items-center my-4 px-2 w-full mx-4 lg:mx-0">
+
+      <div class="flex gap-3 items-center">
+        <button mat-icon-button (click)="isExpanded = !isExpanded" *ngIf="!isMobileLayout" aria-label="Toggle sidenav">
+          <img src="assets/logo-icon.svg" />
+        </button>
+        <img *ngIf="isMobileLayout" src="assets/logo-icon.svg" />
+        <a *ngIf="isExpanded" href="/" class="text-orange-600 font-semibold ">DashDiner</a>
+      </div>
+
+      <button class="text-orange-600 flex items-center " (click)="isExpanded = !isExpanded"
+        [class.is-flipped]="isExpanded" *ngIf="!isMobileLayout">
+        <mat-icon icon>chevron_right</mat-icon>
+      </button>
+    </mat-toolbar>
+
+
+    <mat-nav-list>
+
+      <mat-list-item [routerLink]="nav.route" #rla="routerLinkActive" routerLinkActive="active "
+        *ngFor="let nav of filterNav" (click)="closeSideNav()">
+        <mat-icon class="mr-6 align-middle text-md"
+          [ngClass]="{'text-orange-600': rla.isActive}">{{nav.icon}}</mat-icon>
+        <span class="align-middle	text-sm" [ngClass]="{'text-orange-600': rla.isActive}">{{nav.name}}</span>
+
+
+      </mat-list-item>
+
+      <mat-list-item class="absolute bottom-0" (click)="logout()">
+        <mat-icon class="mr-6 align-middle text-md">logout</mat-icon>
+        <span class="align-middle	text-sm">Cerrar sesión</span>
+
+
+      </mat-list-item>
+
+
+    </mat-nav-list>
+
+  </mat-sidenav>
+  <mat-sidenav-content
+    [ngClass]="{'ml-0':isMobileLayout,'ml-[240px]':isExpanded && !isMobileLayout, 'ml-[80px]': !isExpanded && !isMobileLayout}">
+    <mat-toolbar *ngIf="isMobileLayout" class="mat-elevation-z7" color="primary">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+        *ngIf="isMobileLayout">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <img src="assets/logo-icon.svg" class="color-white" />
+      <span class="ml-4 text-white font-semibold">DashDiner</span>
+
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

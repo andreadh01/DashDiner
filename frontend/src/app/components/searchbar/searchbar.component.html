@@ -1,0 +1,18 @@
+<form (ngSubmit)="buscar()" class="">
+  <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
+  <div class="relative  md:mx-8 lg:mx-36 xl:mx-64 border-gray-300 border  rounded-lg md:border-none">
+    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+      <mat-icon class="text-gray-600">fastfood</mat-icon>
+
+    </div>
+    <input type="search" id="default-search" [formControl]="busqueda"
+      class="block min-w-full p-4 pl-10 lg:pl-14 text-sm text-gray-900 rounded-lg shadow-md border-none"
+      placeholder="Buscar comida o restaurante">
+    <mat-divider [vertical]="true" class="hidden md:block absolute right-9 sm:right-16 bottom-3.5  h-1/2"></mat-divider>
+
+    <button type="submit"
+      class="hidden md:block text-white absolute right-0.5 sm:right-1 bottom-1 top-1 focus:outline-none font-medium rounded-lg text-sm px-1 sm:px-4 py-2 "><mat-icon
+        class="text-gray-600 ">
+        search</mat-icon></button>
+  </div>
+</form>

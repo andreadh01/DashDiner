@@ -1,0 +1,39 @@
+mat-sidenav-container,
+mat-sidenav-content,
+mat-sidenav {
+  height: 100%;
+}
+
+mat-sidenav {
+  transition: width 0.5s;
+}
+.color-white {
+  filter: invert(100%) sepia(1%) saturate(3702%) hue-rotate(90deg)
+    brightness(500%) contrast(100%);
+}
+
+.is-flipped {
+  transform: rotate(-180deg);
+}
+
+.active {
+  border-left: 4px solid #ee7d04 !important;
+  background-color: #fef3e0 !important;
+  color: #ee7d04 !important;
+}
+.active:hover {
+  border-left: 4px solid #ee7d04;
+  background-color: #fef3e0 !important;
+}
+
+mat-list-item {
+  border-left: 4px solid transparent;
+  background-color: white !important;
+  opacity: 100;
+}
+
+mat-list-item:hover {
+  border-left: 4px solid transparent;
+  background-color: #fef3e0 !important;
+  opacity: 100;
+}

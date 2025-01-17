@@ -1,0 +1,16 @@
+<form [formGroup]="form" (ngSubmit)="guardar()" class="py-8 px-4 xl:px-12 flex flex-col gap-4">
+  <h1 class="text-lg font-bold text-orange-600">{{datos.title}}</h1>
+
+  <mat-form-field appearance="outline" class="w-full border-none">
+    <mat-label>Nombre</mat-label>
+    <input required="true" matInput placeholder="" formControlName="nombre" />
+  </mat-form-field>
+
+  <div mat-dialog-actions class="flex gap-4 justify-end mr-4">
+    <button mat-raised-button type="submit" color="primary" class="text-white">Confirmar</button>
+    <a (click)="closeModal()" mat-stroked-button color="primary">Cerrar</a>
+    <!-- <button mat-raised-button [mat-dialog-close]="closemessage" color="accent">Cancel</button> -->
+  </div>
+</form>
+<app-mensaje *ngIf="mensaje" (visible)="mensaje = null" tipo="{{mensaje.tipo}}"
+  contenido="{{mensaje.contenido}}"></app-mensaje>

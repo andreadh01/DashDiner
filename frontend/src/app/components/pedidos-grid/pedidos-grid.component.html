@@ -1,0 +1,60 @@
+<div class="grid grid-cols-1 place-content-center	sm:grid-cols-2 lg:grid-cols-3 px-12 lg:px-4 gap-5   ">
+  <mat-card class="flex flex-col justify-between py-3 h-full shadow-xl rounded-3xl" *ngFor="let orderData of ordenes">
+
+    <mat-card-content class="h-full">
+      <ul class="flex flex-col justify-between h-full">
+        <div class="flex lg:flex-col xl:flex-row justify-between">
+          <div class="flex flex-col">
+            <h2 class="text-lg font-bold">Orden #{{ orderData.id }}</h2>
+            <p class="text-sm text-gray-400">{{ orderData.fecha }}</p>
+          </div>
+          <select *ngIf="admin" name="select"
+            class="py-1 px-3 appearance-none rounded-xl text-center mt-0 lg:mt-3 lg:mt-0"
+            (change)="actualizar($event, orderData)" [ngClass]="color(orderData.estado)">
+            <option value="nuevo" [selected]="orderData.estado == 'nuevo'">Nuevo
+            </option>
+            <option value="preparando" [selected]="orderData.estado == 'preparando'">Preparando
+            </option>
+            <option value="listo" [selected]="orderData.estado == 'listo'">Listo
+            </option>
+            <option value="entregado" [selected]="orderData.estado == 'entregado'">Entregado
+            </option>
+          </select>
+
+          <div *ngIf="!admin && orderData.estado=='entregado'"
+            class="bg-green-50 text-green-400 py-1 px-3 appearance-none rounded-xl text-center mt-0 lg:mt-3 lg:mt-0 flex items-center">
+            Entregado
+          </div>
+
+        </div>
+        <li *ngFor="let item of orderData.items" class="my-6">
+          <p class="text-lg font-bold">{{ item.nombre}}</p>
+          <ul>
+            <li *ngFor="let option of item.opciones">
+              <div class="flex justify-between text-sm text-gray-400">
+                <p>{{ option.nombre }}</p>
+                <p> ${{ option.precio.toFixed(2) }}</p>
+              </div>
+
+            </li>
+          </ul>
+          <div class="flex justify-between font-medium">
+
+            <p>${{ item.precio_total.toFixed(2) }}</p>
+            <p>Qty: {{ item.cantidad }}</p>
+          </div>
+
+        </li>
+
+        <div class="flex justify-between flex-wrap">
+          <mat-divider class="basis-full mb-4"></mat-divider>
+          <p><strong>Precio total:</strong></p>
+          <p><strong>${{ orderData.precio_total.toFixed(2) }}</strong> </p>
+
+        </div>
+      </ul>
+    </mat-card-content>
+
+  </mat-card>
+
+</div>
