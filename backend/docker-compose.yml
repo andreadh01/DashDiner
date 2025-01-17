@@ -1,0 +1,19 @@
+version: '3.7'
+
+services:
+  db:   
+    image: mysql:latest
+    container_name: mysql-dash
+    ports:
+      - "3306:3306"
+    volumes:
+      - dbdata:/var/lib/mysql 
+    environment:
+      MYSQL_ROOT_PASSWORD: ""
+      MYSQL_ALLOW_EMPTY_PASSWORD: true
+      MYSQL_USER: "dash"
+      MYSQL_PASSWORD: "Tostitosconqueso123*/"
+      MYSQL_DATABASE: "dashdiner"
+volumes:
+  dbdata:
+    driver: local

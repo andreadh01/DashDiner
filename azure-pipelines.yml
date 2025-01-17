@@ -1,0 +1,19 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- script: docker login -u $(dockerHubUsername) -p $(dockerHubPassword)
+  env:
+    dockerHubUsername: $(DOCKER_REGISTRY_USERNAME)
+    dockerHubPassword: $(DOCKER_REGISTRY_PASSWORD)
+  displayName: 'Login to Docker Hub'
+
+- script: docker-compose build
+  displayName: 'Build Docker images'
+
+- script: docker-compose push
+  displayName: 'Push Docker images to Docker Hub'
+
