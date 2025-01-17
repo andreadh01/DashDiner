@@ -1,0 +1,34 @@
+<app-navbar></app-navbar>
+<main class="mx-8 py-6 lg:mx-12">
+  <h1 class=" text-2xl font-semibold mt-2 ">Configurar cuenta</h1>
+  <mat-divider class="mb-4"></mat-divider>
+
+  <form [formGroup]="registroForm" (ngSubmit)="actualizarUsuario()"
+    class="mb-5 grid grid-cols-2 gap-3 md:w-1/2 xl:w-1/3">
+    <div>
+      <label for="nombre">Nombre</label>
+      <input formControlName="nombre" [(ngModel)]="usuario.nombre"
+        class="rounded-3xl border-2 border-orange-600 block my-2 py-1 px-3 w-full" type="text">
+    </div>
+    <div>
+      <label for="apellido">Apellido</label>
+      <input formControlName="apellido" [(ngModel)]="usuario.apellido"
+        class="rounded-3xl border-2 border-orange-600 block my-2 py-1 px-3 w-full" type="text">
+    </div>
+    <div class="col-span-2">
+      <label for="email">Email</label>
+      <input formControlName="email" [(ngModel)]="usuario.correo"
+        class="rounded-3xl border-2 border-orange-600 block my-2 py-1 px-3 w-full" type="email">
+    </div>
+    <div>
+      <label for="celular">Celular</label>
+      <input formControlName="celular" [(ngModel)]="usuario.celular"
+        class="rounded-3xl border-2 border-orange-600 block my-2 py-1 px-3 w-full" type="text">
+    </div>
+    <button mat-raised-button type="submit" color="primary"
+      class="text-sm text-white rounded-3xl px-8 py-5 flex items-center self-end my-2">Actualizar
+      datos</button>
+  </form>
+  <app-mensaje *ngIf="mensaje" (visible)="mensaje = null" tipo="{{mensaje.tipo}}"
+    contenido="{{mensaje.contenido}}"></app-mensaje>
+</main>

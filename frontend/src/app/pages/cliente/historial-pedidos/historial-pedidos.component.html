@@ -1,0 +1,26 @@
+<app-navbar></app-navbar>
+<main class="mx-8 lg:mx-12">
+  <div class="flex flex-col md:flex-row md:justify-between">
+    <div>
+      <h1 class=" text-2xl font-semibold mt-2 text-orange-600">Mis pedidos</h1>
+      <p class="text-sm text-gray-400">Aquí puedes ver todos tus pedidos que has realizado</p>
+    </div>
+
+  </div>
+  <div class="my-4">
+    <app-pedidos-grid *ngIf="ordenes.length>0;else oops" [ordenes]="ordenes" [admin]="false"></app-pedidos-grid>
+    <ng-template #oops>
+      <div class="flex flex-col px-24 lg:px-64 justify-center items-center gap-4 h-3/4 text-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"
+          class="bi bi-exclamation-circle fill-orange-600" viewBox="0 0 16 16">
+          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+          <path
+            d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z" />
+        </svg>
+        <h1 class="text-3xl font-semibold">Aún no has realizado ningún pedido</h1>
+        <h1 class="text-xl">Haz tu primer pedido para ver todos tus pedidos aquí </h1>
+      </div>
+    </ng-template>
+  </div>
+
+</main>

@@ -1,0 +1,134 @@
+<main class="mx-8 xl:mx-12 mt-6">
+  <div class="flex flex-col md:flex-row md:justify-between">
+    <div>
+      <h1 class=" text-2xl font-semibold mt-2 text-orange-600">Mi cuenta</h1>
+      <p class="text-sm text-gray-400">Aquí podrás cambiar información sobre tu restaurante y suscribirte al plan
+        premium</p>
+    </div>
+
+    <!--
+    <button mat-stroked-button (click)="agregarProducto()" color="primary"
+      class="text-sm bg-white rounded-lg py-5 flex items-center min-w-fit  md:self-end self-start my-2 md:my-0">Agregar
+      producto<mat-icon iconPositionEnd>add_circle_outline</mat-icon></button> -->
+
+  </div>
+  <div class="flex flex-col xl:flex-row my-8 bg-white rounded-2xl mat-elevation-z2">
+    <div class="md:mx-16 xl:mx-0 flex flex-col p-6 xl:w-1/2">
+
+      <div class="flex justify-between mb-3">
+
+        <h1 class="text-xl font-medium">Balance de cuenta</h1>
+        <h1 class="text-xl font-bold text-orange-600">${{cantidad.toFixed(2)}}</h1>
+      </div>
+      <label>Clabe interbancaria</label>
+      <input [value]="clabe" class="rounded-3xl border-2 border-orange-600 block my-2 py-1 px-3  md:min-w-[230px]"
+        type="text" disabled>
+      <button (click)="transferir()" mat-flat-button type="button" color="primary"
+        class="text-sm text-white rounded-3xl px-8 py-5 flex items-center w-full  justify-self-end mb-2 self-end">Transferir
+        a mi cuenta bancaria</button>
+      <mat-divider class="my-4"></mat-divider>
+      <h1 class="text-xl font-medium">Datos del restaurante</h1>
+      <form [formGroup]="restauranteForm" (ngSubmit)="actualizarRestaurante()" class="mb-5 w-full flex flex-col">
+
+        <div class="flex gap-3">
+          <div>
+
+
+            <div>
+              <label for="nombreRest">Nombre del restaurante</label>
+              <input formControlName="nombre" [(ngModel)]="restaurante.nombre"
+                class="rounded-3xl border-2 border-orange-600 block my-2 py-1 px-3  md:min-w-[230px]" type="text">
+            </div>
+
+            <div>
+              <label for="celularRest">Teléfono del restaurante</label>
+              <input formControlName="celular" [(ngModel)]="restaurante.celular"
+                class="rounded-3xl border-2 border-orange-600 block my-2 py-1 px-3 md:min-w-[230px]" type="text">
+            </div>
+
+            <div>
+              <label for="direccion">Dirección</label>
+              <input formControlName="direccion" [(ngModel)]="restaurante.direccion"
+                class="rounded-3xl border-2 border-orange-600 block my-2 py-1 px-3 md:min-w-[230px]" type="text">
+            </div>
+            <div>
+              <label for="horario">Horario</label>
+              <input formControlName="horario" [(ngModel)]="restaurante.horario"
+                class="rounded-3xl border-2 border-orange-600 block my-2 py-1 px-3 md:min-w-[230px]" type="text">
+            </div>
+          </div>
+          <div class="mt-4 flex flex-col items-center">
+            <img [src]="url.url"
+              class="w-[130px] h-[130px]  md:w-[200px] md:h-[200px] border-2 border-orange-600 rounded-full object-fill	 self-center" />
+
+            <label for="files" class="cursor-pointer self-center my-4 bg-white hover:bg-orange-50 border border-gray-300
+            text-orange-600 py-2 px-4 rounded-xl max-w-fit">Seleccionar
+              imagen</label>
+            <input id="files" type="file" (change)="onSelectFile($event)" class="hidden"
+              placeholder="Seleccione la imagen" accept="image/*" />
+          </div>
+        </div>
+
+        <div>
+          <label for="descripcion">Descripción</label>
+          <textarea formControlName="descripcion" [(ngModel)]="restaurante.descripcion"
+            class="rounded-3xl border-2 border-orange-600 block my-2 py-1 px-3 w-full " type="text"></textarea>
+        </div>
+
+
+
+        <button mat-raised-button type="submit" color="primary"
+          class="text-sm text-white rounded-3xl px-8 py-5 flex items-center w-fit  justify-self-end mt-2 self-end">Actualizar
+          datos</button>
+      </form>
+
+    </div>
+    <mat-divider [vertical]="true" class="my-8 hidden xl:block"></mat-divider>
+    <mat-divider class="mx-16 my-4 xl:hidden"></mat-divider>
+    <div id="suscription" *ngIf="suscrito"
+      class="md:mx-16 xl:mx-0 flex-wrap	 p-6 flex xl:flex-col justify-between xl:justify-start xl:gap-4 items-start xl:w-1/2 my-4">
+
+      <div>
+        <h1 class="text-xl text-orange-600">PLAN ACTUAL</h1>
+        <h1 class="font-bold text-2xl text-orange-600">Plan Premium</h1>
+        <h1 class="font-medium text-lg">$500 MXN al mes</h1>
+      </div>
+      <div>
+        <h1 class="font-medium text-lg">BENEFICIOS</h1>
+        <h1 class="text-md">Publicidad en nuestra página</h1>
+        <h1 class="text-md">Acceso al dashboard</h1>
+        <h1 class="text-md">Acceso a estadísticas</h1>
+      </div>
+
+      <button mat-stroked-button (click)="cancelarPlan()"
+        class="text-xs md:text-sm col-span-2 place-self-start w-full mt-4">Cancelar plan</button>
+    </div>
+
+    <div id="suscription" *ngIf="not_suscrito"
+      class="md:mx-16 xl:mx-0 flex-wrap	 xl:my-24 flex xl:flex-col justify-around items-center xl:w-1/2 gap-4 my-8">
+      <h1 class="font-semibold text-2xl text-orange-600 basis-full text-center xl:basis-0">Mejora tu experiencia en
+        DashDiner
+      </h1>
+      <div
+        class="py-8 px-4  shadow-lg border border-gray-50 rounded-2xl w-72 h-56 xl:h-fit flex flex-col justify-center items-start">
+        <h1 class="text-md">PLAN ACTUAL</h1>
+        <h1 class="font-bold text-xl">Plan Básico</h1>
+        <h1 class="font-bold text-xl">$0 MXN al mes</h1>
+      </div>
+      <div
+        class="py-8 px-4 shadow-lg border border-gray-50 rounded-2xl w-72 h-56 xl:h-fit flex flex-col justify-center items-start">
+        <h1 class="font-bold text-xl">Plan Premium</h1>
+        <h1 class="font-bold text-xl">$500 MXN al mes</h1>
+        <h1 class="text-sm">BENEFICIOS</h1>
+        <h1 class="text-sm">Publicidad en nuestra página</h1>
+        <h1 class="text-sm">Acceso al dashboard</h1>
+        <h1 class="text-sm">Acceso a estadísticas</h1>
+        <button (click)="openModal()" mat-flat-button type="button" color="primary"
+          class="text-sm text-white rounded-xl px-8 py-5 flex items-center w-full mt-4 justify-self-end mb-2 self-end">Actualizar
+          a Premium</button>
+      </div>
+    </div>
+  </div>
+  <app-mensaje *ngIf="mensaje" (visible)="mensaje = null" tipo="{{mensaje.tipo}}"
+    contenido="{{mensaje.contenido}}"></app-mensaje>
+</main>

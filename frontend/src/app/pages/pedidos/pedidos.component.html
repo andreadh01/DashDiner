@@ -1,0 +1,36 @@
+<main class="mx-8 lg:mx-12 mt-6">
+  <div class="flex flex-col md:flex-row md:justify-between">
+    <div>
+      <h1 class=" text-2xl font-semibold mt-2 text-orange-600">Detalles de órdenes</h1>
+      <p class="text-sm text-gray-400">Aquí podrás ver todas las órdenes activas de tu restaurante</p>
+    </div>
+
+    <div class="flex gap-3 h-full items-center">
+      <div class="border border-gray-200 bg-white rounded-lg  h-[30px]">
+        <input class="border-none bg-transparent rounded-lg  focus:ring-none h-[30px] p-2 " [(ngModel)]="searchQuery"
+          placeholder="Buscar por ID" (input)="loadItems()" type="number" />
+      </div>
+      <button *ngIf="usuario.tipo == 'cocina'" mat-icon-button (click)="logout()">
+        <mat-icon class="text-gray-500">logout</mat-icon>
+      </button>
+    </div>
+
+
+
+    <!-- ... Resto del código HTML ... -->
+
+  </div>
+  <div class="py-12">
+    <app-pedidos-grid [ordenes]="ordenes" [admin]="true"></app-pedidos-grid>
+  </div>
+
+
+  <!-- <div *ngIf="loaderService.isLoading | async" class="flex w-full h-[72vh] justify-center items-center">
+      <mat-spinner class=""></mat-spinner>
+    </div>
+     </div>
+-->
+
+  <app-mensaje *ngIf="mensaje" (visible)="mensaje = null" tipo="{{mensaje.tipo}}"
+    contenido="{{mensaje.contenido}}"></app-mensaje>
+</main>

@@ -1,0 +1,14 @@
+<app-navbar></app-navbar>
+
+<div class="mx-8 lg:mx-12 py-6">
+  <div>
+    <h1 class=" text-2xl font-semibold mt-2">Productos</h1>
+    <mat-divider></mat-divider>
+    <app-grid [busqueda]="true" [items]="productos" [producto]="true"></app-grid>
+  </div>
+  <div class="mt-8">
+    <h1 class=" text-2xl font-semibold mt-2">Restaurantes</h1>
+    <mat-divider></mat-divider>
+    <app-grid [busqueda]="true" [items]="restaurantes" [restaurante]="true"></app-grid>
+  </div>
+</div>

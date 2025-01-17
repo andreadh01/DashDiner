@@ -1,0 +1,42 @@
+<div class="m-0 flex bg-[rgb(255, 250, 247)] h-full w-full">
+  <div class="absolute  w-full h-full z-[-1] overflow-hidden">
+    <img cImg src="assets/Login/vector_1.png" class="absolute    top-28 right-0">
+    <img cImg src="assets/Login/vector_2.png" class="absolute    top-28 right-0">
+    <img cImg src="assets/Login/elipse_3.png"
+      class="hidden lg:block lg:absolute -top-4 right-0 w-[650px] h-[650px] xl:w-[850px] xl:h-[800px]">
+    <img cImg src="assets/Login/elipse_1.png" class="absolute    bottom-0 right-0">
+
+
+    <img cImg src="assets/Login/elipse_2.png" class="absolute bottom-0">
+    <img cImg src="assets/platillos.png"
+      class="hidden lg:block lg:absolute bottom-48 xl:bottom-24 -right-24 xl:-right-48 w-[700px] xl:w-[1000px]">
+  </div>
+  <div
+    class="text-gray-500 px-6 md:px-10 xl:px-24 text-sm grid self-center gap-4 grow justify-center items-center lg:justify-start">
+    <app-logo></app-logo>
+    <div class="grid justify-center text-center gap-3 mt-6 mb-3 px-20 md:px-44 lg:px-0 lg:w-3/4 ">
+      <div class="text-black text-3xl font-bold">Recuperar contraseña</div>
+      <div class="">Te hemos enviado un correo con un código de 4 dígitos, ingrésalo en la casilla.</div>
+    </div>
+    <div class="px-20 md:px-44 lg:px-0 lg:w-3/4">
+      <form [formGroup]="resetCodeForm" class="mb-5">
+        <label for="code">Código</label>
+        <input formControlName="code" type="text" id="code" maxlength=4
+          class="rounded-3xl border-2 border-orange-600 block my-2 py-1 px-3 w-full">
+        <!-- <div *ngIf="code.invalid && (code.dirty || code.touched)" class="text-danger">
+          <div *ngIf="code.errors?.['required']">Reset Code is required</div>
+          <div *ngIf="code.errors?.['pattern']">Reset Code must be a 4-digit number</div>
+        </div> -->
+        <div class="flex justify-center">
+          <button mat-flat-button class="text-white w-fit px-12 rounded-2xl self-center mt-8" color="primary"
+            (click)="resetCode()" type="submit" name="enviar" value="Enviar">Enviar</button>
+        </div>
+      </form>
+
+    </div>
+
+
+  </div>
+
+  <app-mensaje *ngIf="mensaje" (visible)="mensaje = null" tipo="{{mensaje.tipo}}"
+    contenido="{{mensaje.contenido}}"></app-mensaje>

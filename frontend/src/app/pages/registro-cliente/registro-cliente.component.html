@@ -1,0 +1,121 @@
+<div class="m-0 py-8 flex relative bg-[rgb(255, 250, 247)] h-full lg:overflow-hidden">
+  <div class="absolute  w-full h-full z-[-1]">
+
+
+    <div class="relative w-full h-full">
+
+      <img cImg src=" assets/Login/vector_1.png" class="  absolute    top-28 right-0 ">
+      <img cImg src="assets/Login/vector_2.png" class="  absolute    top-28 right-0">
+
+
+      <img cImg src="assets/Login/elipse_1.png" class="absolute    bottom-0 right-0">
+
+
+      <img cImg src="assets/Login/elipse_2.png" class="absolute bottom-0">
+
+      <div
+        class="bg-[#fff3eb]  w-[700px] h-[700px] xl:w-[900px] xl:h-[900px] hidden lg:absolute lg:block -top-24 -right-36 xl:-top-72 xl:-right-24 overflow-hidden rounded-full">
+        <img cImg src="assets/Login/promo-image.png"
+          class="absolute -bottom-36 right-24 xl:-bottom-52 xl:right-20 max-w-[550px] xl:max-w-[750px]">
+
+      </div>
+      <img cImg src="assets/Login/plate.png"
+        class="hidden lg:block lg:absolute bottom-20 xl:bottom-6 right-28 xl:right-48 w-[250px] xl:w-[350px]">
+    </div>
+  </div>
+  <div
+    class="text-gray-500 px-4 xl:px-24 w-full text-sm grid self-center gap-4 grow justify-center items-center lg:justify-start">
+    <app-logo></app-logo>
+    <div class="grid justify-center text-center gap-3 mt-6 mb-3">
+      <div class="text-black text-3xl font-bold">Regístrate</div>
+      <div class="">¡Crea tu cuenta de DashDiner!</div>
+    </div>
+    <div>
+      <form [formGroup]="registroForm" (ngSubmit)="registrarUsuario()" class="mb-5 grid grid-cols-2 gap-3 w-full">
+        <div>
+          <label for="nombre">Nombre</label>
+          <input formControlName="nombre"
+            class="rounded-3xl border-2 border-orange-600 block my-2 py-1 px-3 w-full md:min-w-[230px]" type="text">
+        </div>
+        <div>
+          <label for="apellido">Apellido</label>
+          <input formControlName="apellido" class="rounded-3xl border-2 border-orange-600 block my-2 py-1 px-3 w-full"
+            type="text">
+        </div>
+
+        <div class="col-span-2">
+          <label for="email">Email</label>
+          <input formControlName="email" class="rounded-3xl border-2 border-orange-600 block my-2 py-1 px-3 w-full"
+            type="email">
+        </div>
+        <div>
+          <label for="username">Username</label>
+          <input formControlName="username"
+            class="rounded-3xl border-2 border-orange-600 block my-2 py-1 px-3 w-full md:min-w-[230px]" type="text">
+        </div>
+        <div>
+          <label for="celular">Celular</label>
+          <input formControlName="celular" class="rounded-3xl border-2 border-orange-600 block my-2 py-1 px-3 w-full"
+            type="text">
+        </div>
+        <div>
+
+
+          <label for="pass">Password</label>
+          <input formControlName="password" class="rounded-3xl border-2 border-orange-600 block my-2 py-1 px-3 w-full"
+            type="password">
+        </div>
+        <div>
+
+
+          <label for="confPassword">Confirmar Password</label>
+          <input formControlName="confPassword"
+            class="rounded-3xl border-2 border-orange-600 block my-2 py-1 px-3 w-full" type="password">
+        </div>
+        <div class="flex justify-center items-center col-span-2">
+          <input type="checkbox" value="lsAgree" class="mr-1"> <label for="termsUseLabel">Acepto los términos de
+            uso</label>
+        </div>
+        <div class="flex justify-center col-span-2">
+          <button mat-flat-button class="text-white w-fit px-12 rounded-2xl self-center" color="primary"
+            type="submit">Registrarse</button>
+
+        </div>
+      </form>
+
+    </div>
+
+
+
+
+    <!-- <div class="grid justify-center">
+      <div class="text-black">o inicia sesión con otras cuentas</div>
+      <div class="flex mt-4 justify-center">
+        <div class="mx-2">
+          <img cImg src="assets/google-icon.webp" class="w-[20px]">
+        </div>
+        <div class="mx-2">
+          <img cImg src="assets/facebook-icon.png" class="w-[20px]">
+        </div>
+        <div class="mx-2">
+          <img cImg src="assets/instagram-icon.webp" class="w-[20px]">
+        </div>
+        <div class="mx-2">
+          <img cImg src="assets/linkedin-icon.webp" class="w-[20px]">
+        </div>
+      </div>
+    </div> -->
+    <div class="flex justify-center">
+      <div class="text-black">¿Ya tienes una cuenta?</div>
+      <a class="cursor-pointer text-[#f48908] ml-1" href="login">Inicia sesión</a>
+    </div>
+    <div class="flex flex-col md:flex-row justify-center items-center">
+      <div class="text-black">¿Quieres registrar tu restaurante?</div>
+      <a class="cursor-pointer text-[#f48908] ml-1" href="registro-restaurante">Haz click aquí</a>
+    </div>
+  </div>
+
+</div>
+
+<app-mensaje *ngIf="mensaje" (visible)="mensaje = null" tipo="{{mensaje.tipo}}"
+  contenido="{{mensaje.contenido}}"></app-mensaje>

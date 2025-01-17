@@ -1,0 +1,80 @@
+<main class="mx-8 xl:mx-12 mt-6">
+  <div class="flex flex-col md:flex-row md:justify-between">
+    <div>
+      <h1 class="text-2xl font-semibold mt-2 text-orange-600">Administrar Cocineros</h1>
+      <p class="text-sm text-gray-400">Aquí puedes agregar, modificar y eliminar cocineros</p>
+    </div>
+
+    <!--
+      <button mat-stroked-button (click)="agregarCocinero()" color="primary"
+        class="text-sm bg-white rounded-lg py-5 flex items-center min-w-fit md:self-end self-start my-2 md:my-0">Agregar
+        cocinero<mat-icon iconPositionEnd>add_circle_outline</mat-icon></button> -->
+
+  </div>
+  <div class="flex flex-col xl:flex-row my-8 bg-white rounded-2xl mat-elevation-z2">
+    <div class="md:mx-16 xl:mx-0 flex flex-col p-6 xl:w-1/2">
+
+      <div class="flex justify-between mb-3">
+
+        <h1 class="text-xl font-medium">Lista de Cocineros</h1>
+        <!-- Puedes mostrar aquí la cantidad de cocineros -->
+      </div>
+
+      <form [formGroup]="cocineroForm" (ngSubmit)="agregarCocinero()" class="mb-5 w-full flex flex-col">
+        <div class="flex gap-3">
+          <div>
+            <div>
+              <label for="nombre_usuario">Nombre de Usuario</label>
+              <input formControlName="nombre_usuario"
+                class="rounded-3xl border-2 border-orange-600 block my-2 py-1 px-3 md:min-w-[230px]" type="text">
+            </div>
+
+            <div>
+              <label for="correo">Correo</label>
+              <input formControlName="correo"
+                class="rounded-3xl border-2 border-orange-600 block my-2 py-1 px-3 md:min-w-[230px]" type="email">
+            </div>
+
+            <div>
+              <label for="password">Contraseña</label>
+              <input formControlName="password"
+                class="rounded-3xl border-2 border-orange-600 block my-2 py-1 px-3 md:min-w-[230px]" type="password">
+            </div>
+
+            <div>
+              <label for="celular">Teléfono</label>
+              <input formControlName="celular"
+                class="rounded-3xl border-2 border-orange-600 block my-2 py-1 px-3 md:min-w-[230px]" type="tel">
+            </div>
+          </div>
+          <div>
+            <div>
+              <label for="nombre">Nombre</label>
+              <input formControlName="nombre"
+                class="rounded-3xl border-2 border-orange-600 block my-2 py-1 px-3 md:min-w-[230px]" type="text">
+            </div>
+
+            <div>
+              <label for="apellido">Apellido</label>
+              <input formControlName="apellido"
+                class="rounded-3xl border-2 border-orange-600 block my-2 py-1 px-3 md:min-w-[230px]" type="text">
+            </div>
+
+          </div>
+        </div>
+
+        <button mat-raised-button type="submit" color="primary"
+          class="text-sm text-white rounded-3xl px-8 py-5 flex items-center w-fit justify-self-end mt-2 self-end">Agregar
+          Cocinero</button>
+      </form>
+
+    </div>
+    <mat-divider [vertical]="true" class="my-8 hidden xl:block"></mat-divider>
+    <mat-divider class="mx-16 my-4 xl:hidden"></mat-divider>
+
+    <!-- Aquí puedes mostrar la lista de cocineros y permitir su modificación o eliminación -->
+
+  </div>
+  <app-mensaje *ngIf="mensaje" (visible)="mensaje = null" tipo="{{mensaje.tipo}}"
+    contenido="{{mensaje.contenido}}"></app-mensaje>
+</main>

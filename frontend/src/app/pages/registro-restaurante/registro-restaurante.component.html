@@ -1,0 +1,189 @@
+<div class="m-0 py-8 flex relative bg-[rgb(255, 250, 247)] lg:overflow-hidden h-screen">
+  <div class="absolute  w-full h-full z-[-1]">
+
+
+    <div class="relative w-full h-full">
+
+      <img cImg src=" assets/Login/vector_1.png" class="  absolute    top-28 right-0 ">
+      <img cImg src="assets/Login/vector_2.png" class="  absolute    top-28 right-0">
+
+
+      <img cImg src="assets/Login/elipse_1.png" class="absolute    bottom-0 right-0">
+
+
+      <img cImg src="assets/Login/elipse_2.png" class="absolute bottom-0">
+
+      <div
+        class="bg-[#fff3eb]  w-[700px] h-[700px] xl:w-[900px] xl:h-[900px] hidden lg:absolute lg:block -top-24 -right-36 xl:-top-72 xl:-right-24 overflow-hidden rounded-full">
+        <img cImg src="assets/restaurante.png"
+          class="absolute -bottom-12 right-16 xl:-bottom-20 xl:right-4 max-w-[600px] xl:max-w-[850px]">
+
+      </div>
+      <img cImg src="assets/eating.png"
+        class="hidden lg:block lg:absolute bottom-20 xl:bottom-6 right-16 xl:right-36  w-[350px] xl:w-[450px]">
+    </div>
+  </div>
+  <div
+    class="text-gray-500 px-4 xl:px-24 w-full text-sm grid self-center gap-4 grow justify-center items-center lg:justify-start">
+    <app-logo></app-logo>
+    <div class="grid justify-center text-center gap-3 mt-6 mb-3">
+      <div *ngIf="!part2" class="text-black text-3xl font-bold">Registra tu restaurante</div>
+      <div *ngIf="!part2">Ingresa los datos del responsable</div>
+    </div>
+
+    <div>
+      <button *ngIf="part2" (click)="part2 = false" mat-flat-button
+        class=" flex text-orange-600 bg-transparent text-sm -ml-4 hover:bg-[rgb(255, 250, 247)]" type="button">
+        Regresar<mat-icon>keyboard_backspace</mat-icon>
+      </button>
+      <form [formGroup]="registroForm" (ngSubmit)="registrarAdmin()" class="mb-5 w-full">
+        <div *ngIf="!part2" class="grid grid-cols-2 gap-3 ">
+          <div>
+            <label for="nombre">Nombre</label>
+            <input formControlName="nombre"
+              class="rounded-3xl border-2 border-orange-600 block my-2 py-1 px-3 w-full md:min-w-[230px]" type="text">
+          </div>
+          <div>
+            <label for="apellido">Apellido</label>
+            <input formControlName="apellido" class="rounded-3xl border-2 border-orange-600 block my-2 py-1 px-3 w-full"
+              type="text">
+          </div>
+
+          <div class="">
+            <label for="email">Email</label>
+            <input formControlName="email" class="rounded-3xl border-2 border-orange-600 block my-2 py-1 px-3 w-full"
+              type="email">
+          </div>
+          <div>
+            <label for="clabe">Clabe interbancaria</label>
+            <input formControlName="clabe"
+              class="rounded-3xl border-2 border-orange-600 block my-2 py-1 px-3 w-full md:min-w-[230px]" maxlength="18"
+              type="text">
+          </div>
+          <div>
+            <label for="username">Username</label>
+            <input formControlName="username"
+              class="rounded-3xl border-2 border-orange-600 block my-2 py-1 px-3 w-full md:min-w-[230px]" type="text">
+          </div>
+          <div>
+            <label for="celular">Celular</label>
+            <input formControlName="celular" class="rounded-3xl border-2 border-orange-600 block my-2 py-1 px-3 w-full"
+              type="text">
+          </div>
+          <div>
+
+
+            <label for="pass">Password</label>
+            <input formControlName="password" class="rounded-3xl border-2 border-orange-600 block my-2 py-1 px-3 w-full"
+              type="password">
+          </div>
+          <div>
+
+
+            <label for="confPassword">Confirmar Password</label>
+            <input formControlName="confPassword"
+              class="rounded-3xl border-2 border-orange-600 block my-2 py-1 px-3 w-full" type="password">
+          </div>
+          <div class="flex justify-center items-center col-span-2">
+            <input type="checkbox" value="lsAgree" class="mr-1"> <label for="termsUseLabel">Acepto los términos de
+              uso</label>
+          </div>
+        </div>
+
+        <div *ngIf="part2" class="flex flex-col ">
+          <div class="flex gap-3">
+            <div>
+
+
+              <div>
+                <label for="nombreRest">Nombre del restaurante</label>
+                <input formControlName="nombreRest"
+                  class="rounded-3xl border-2 border-orange-600 block my-2 py-1 px-3  md:min-w-[230px]" type="text">
+              </div>
+
+              <div>
+                <label for="celularRest">Teléfono del restaurante</label>
+                <input formControlName="celularRest"
+                  class="rounded-3xl border-2 border-orange-600 block my-2 py-1 px-3 md:min-w-[230px]" type="text">
+              </div>
+
+              <div>
+                <label for="direccion">Dirección</label>
+                <input formControlName="direccion"
+                  class="rounded-3xl border-2 border-orange-600 block my-2 py-1 px-3 md:min-w-[230px]" type="text">
+              </div>
+              <div>
+                <label for="horario">Horario</label>
+                <input formControlName="horario"
+                  class="rounded-3xl border-2 border-orange-600 block my-2 py-1 px-3 md:min-w-[230px]" type="text">
+              </div>
+            </div>
+            <div class="mt-4 flex flex-col items-center">
+              <img [src]="url.url"
+                class="min-w-[130px] min-h-[130px]  md:w-[200px] md:h-[200px] border-2 border-orange-600 rounded-full object-fill	 self-center" />
+
+              <label for="files" class="cursor-pointer self-center my-4 bg-white hover:bg-orange-50 border border-gray-300
+                text-orange-600 py-2 px-4 rounded-xl max-w-fit">Seleccionar
+                imagen</label>
+              <input id="files" type="file" (change)="onSelectFile($event)" class="hidden"
+                placeholder="Seleccione la imagen" accept="image/*" />
+            </div>
+          </div>
+
+          <div>
+            <label for="descripcion">Descripción</label>
+            <textarea formControlName="descripcion"
+              class="rounded-3xl border-2 border-orange-600 block my-2 py-1 px-3 w-full " type="text"></textarea>
+          </div>
+
+
+
+
+
+        </div>
+
+        <div class="flex justify-center col-span-2">
+          <button *ngIf="!part2" (click)="part2 = true" mat-flat-button
+            class="text-white w-fit px-12 rounded-2xl self-center my-4" color="primary" type="button">Siguiente</button>
+          <button *ngIf="part2" mat-flat-button class="text-white w-fit px-12 rounded-2xl self-center my-4"
+            color="primary" type="submit">Registrase</button>
+
+
+        </div>
+      </form>
+
+    </div>
+
+
+
+
+    <!-- <div class="grid justify-center">
+      <div class="text-black">o inicia sesión con otras cuentas</div>
+      <div class="flex mt-4 justify-center">
+        <div class="mx-2">
+          <img cImg src="assets/google-icon.webp" class="w-[20px]">
+        </div>
+        <div class="mx-2">
+          <img cImg src="assets/facebook-icon.png" class="w-[20px]">
+        </div>
+        <div class="mx-2">
+          <img cImg src="assets/instagram-icon.webp" class="w-[20px]">
+        </div>
+        <div class="mx-2">
+          <img cImg src="assets/linkedin-icon.webp" class="w-[20px]">
+        </div>
+      </div>
+    </div> -->
+    <div class="flex justify-center">
+      <div class="text-black">¿Ya tienes una cuenta?</div>
+      <a class="cursor-pointer text-[#f48908] ml-1" href="login">Inicia sesión</a>
+    </div>
+    <div class="flex justify-center">
+      <div class="text-black">¿Eres un cliente?</div>
+      <a class="cursor-pointer text-[#f48908] ml-1" href="registro-cliente">Haz click aquí</a>
+    </div>
+  </div>
+
+</div>
+<app-mensaje *ngIf="mensaje" (visible)="mensaje = null" tipo="{{mensaje.tipo}}"
+  contenido="{{mensaje.contenido}}"></app-mensaje>

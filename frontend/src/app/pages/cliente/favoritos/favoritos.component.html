@@ -1,0 +1,13 @@
+<app-navbar></app-navbar>
+<main class="mx-8 py-6 lg:mx-12">
+  <div>
+    <h1 class=" text-2xl font-semibold mt-2 ">Productos favoritos</h1>
+    <mat-divider></mat-divider>
+    <app-grid [items]="productos" [producto]="true"></app-grid>
+  </div>
+  <div class="mt-6">
+    <h1 class=" text-2xl font-semibold mt-2 ">Restaurantes favoritos</h1>
+    <mat-divider></mat-divider>
+    <app-grid [items]="restaurantes" [restaurante]="true"></app-grid>
+  </div>
+</main>

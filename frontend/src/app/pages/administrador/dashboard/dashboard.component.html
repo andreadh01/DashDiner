@@ -1,0 +1,160 @@
+<main class="mx-8 xl:mx-12 mt-6">
+
+  <div class="flex flex-col md:flex-row md:justify-between">
+    <div>
+      <h1 class="text-2xl font-semibold mt-2 text-orange-600">Dashboard</h1>
+      <p class="text-sm text-gray-400">Visualiza las estadísticas de tu restaurante</p>
+    </div>
+
+    <div class="flex items-center gap-3">
+
+      <mat-button-toggle-group [(ngModel)]="selected" name="filterBestSeller" aria-label="Date filter"
+        class="border-none h-fit">
+        <mat-button-toggle (change)="aplicarFiltros($event.value)" value="day">Día</mat-button-toggle>
+        <mat-button-toggle (change)="aplicarFiltros($event.value)" value="month">Mes</mat-button-toggle>
+        <mat-button-toggle (change)="aplicarFiltros($event.value)" value="year">Año</mat-button-toggle>
+      </mat-button-toggle-group>
+
+      <div class="flex flex-col">
+
+
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+
+        <mat-datepicker #picker></mat-datepicker>
+      </div>
+
+    </div>
+
+
+  </div>
+  <div class="flex justify-end">
+    <h1 *ngIf="fechaInicio.value != ''" class="text-sm">Fecha seleccionada:</h1>
+    <input [formControl]="fechaInicio" (dateChange)="aplicarFiltros(selected)"
+      class="w-[90px] bg-transparent border-none px-2 text-sm" matInput [matDatepicker]="picker">
+  </div>
+  <div class="main">
+
+    <div class="row sparkboxes mt-4 mb-4">
+      <div class="col-md-4">
+        <div class="box box1 w-full h-full p-4">
+
+
+
+          <div class="flex flex-col w-full">
+            <div class=" flex justify-between  w-full">
+              <h1 class="text-3xl font-bold">{{ganancias}}</h1>
+              <div class="bg-orange-100 p-2 rounded-lg text-orange-700 flex items-center">
+                <mat-icon class="">attach_money</mat-icon>
+
+              </div>
+            </div>
+            <h1 class="uppercase text-gray-500 text-sm">Ganancias totales</h1>
+          </div>
+
+
+          <!-- <apx-chart [series]="[{ data: sparklineData1 }]" [chart]="{ type: 'line', height: 100 }"></apx-chart> -->
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="box box2 w-full h-full p-4">
+
+
+
+          <div class="flex flex-col w-full">
+            <div class=" flex justify-between  w-full">
+              <h1 class="text-3xl font-bold">{{ordenesTotales}}</h1>
+              <div class="bg-orange-100 p-2 rounded-lg text-orange-700 flex items-center">
+                <mat-icon class="">edit_note</mat-icon>
+
+              </div>
+            </div>
+            <h1 class="uppercase text-gray-500 text-sm">Órdenes totales</h1>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="box box3 w-full h-full p-4">
+
+
+
+          <div class="flex flex-col w-full">
+            <div class=" flex justify-between  w-full">
+              <h1 class="text-3xl font-bold">{{clientCount}}</h1>
+              <div class="bg-orange-100 p-2 rounded-lg text-orange-700 flex items-center">
+                <mat-icon class="">group</mat-icon>
+
+              </div>
+            </div>
+            <h1 class="uppercase text-gray-500 text-sm">Clientes totales</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-5 mb-4">
+      <div class="col-md-6">
+        <div class="box">
+          <h1 class="font-semibold text-lg">Ganancias totales en el año</h1>
+          <apx-chart [colors]="['#f48d06', '#fab74f','#3898bd','#8ad1e1','#133c6c']" [yaxis]="{show:false}"
+            [labels]="categories" [series]="monthlyRevenueData" [dataLabels]="{enabled:false}" [chart]="{
+            type: 'bar',
+            height: 350,
+          }"></apx-chart>
+
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="box">
+          <h1 class="font-semibold text-lg">Artículos favoritos</h1>
+
+          <!-- <apx-chart [colors]="['#f48d06', '#fab74f','#3898bd','#8ad1e1','#133c6c']" [yaxis]="{show:false}"
+            [labels]="articulosFavoritosLabel" [series]="articulosFavoritos" [legend]="{show:false}" [chart]="{
+          type: 'donut',
+          height: 400,
+        }"></apx-chart> -->
+          <apx-chart [colors]="donutChartOptions.colors!" [series]="donutChartOptions.series!"
+            [labels]="donutChartOptions.labels!" [chart]="donutChartOptions.chart!"></apx-chart>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-4 mb-4">
+
+      <div class="col-md-6">
+        <div class="box">
+          <h1 class="font-semibold text-lg">Best sellers</h1>
+          <h1>Estos son los productos más vendidos de tu restaurante</h1>
+          <div *ngFor="let item of bestSellers; let i=index"
+            class="flex w-full gap-3 py-4 border-b border-gray-200 items-center">
+            <h1 class="text-3xl font-bold text-orange-600">{{i+1}}</h1>
+            <img [src]="item.imagen" class="w-[50px] h-[50px] rounded-xl">
+            <div class="w-full">
+              <p class="text-sm font-bold">{{item.nombre}}</p>
+              <div class="flex justify-between w-full">
+                <p class="font-medium text-sm">${{item.precio.toFixed(2)}}</p>
+                <p class="font-medium text-sm">Orden {{item.ventas}}x</p>
+              </div>
+
+            </div>
+          </div>
+          <!-- <apx-chart [series]="lineChartOptions.series!" [chart]="lineChartOptions.chart!"></apx-chart> -->
+        </div>
+
+      </div>
+      <div class="col-md-6">
+        <div class="box">
+          <h1 class="font-semibold text-lg">Clientes nuevos al mes</h1>
+
+          <apx-chart [stroke]="{
+            curve: 'smooth',
+          }" [colors]="['#f48d06', '#fab74f','#3898bd','#8ad1e1','#133c6c']" [yaxis]="{show:false}"
+            [labels]="categories" [series]="clientsPerMonth" [chart]="{
+            type: 'line',
+            height: 350,
+          }"></apx-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

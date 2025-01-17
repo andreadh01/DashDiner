@@ -1,0 +1,57 @@
+<app-navbar></app-navbar>
+
+<div class="flex flex-col lg:flex-row lg:py-8 gap-4 xl:gap-16 md:px-4 xl:px-12 py-6 ">
+  <h1 class="font-bold text-2xl border-b lg:hidden mx-4">{{restaurante.nombre}}</h1>
+  <div
+    class="grid lg:grid-flow-row grid-cols-3	px-4 lg:grid-cols-none gap-2 lg:gap-8 lg:justify-items-center auto-rows-max	 min-w-fit	">
+    <div>
+      <img class="border border-gray-300 rounded-full h-[150px] lg:h-[200px] lg:max-w-[200px] max-w-[150px] object-fill"
+        src="{{restaurante.logo}}" />
+
+
+      <h1 class="font-bold text-2xl hidden lg:block text-center my-2">{{restaurante.nombre}}</h1>
+    </div>
+
+
+    <div class="flex flex-col col-span-2 items-end lg:items-start lg:col-span-1 	px-4 lg:px-0">
+      <button *ngIf="usuario.tipo == 'cliente' && !favorito" mat-flat-button (click)="addToFavorites()"
+        class="flex items-top font-semibold text-sm text-[#0D2C54] p-2"><mat-icon
+          class="text-sm">favorite_border</mat-icon>Agregar a
+        favoritos
+      </button>
+      <button *ngIf="usuario.tipo == 'cliente' && favorito" mat-flat-button (click)="removeFromFavorites()"
+        class="flex items-top font-semibold text-sm text-[#0D2C54] p-2"><mat-icon
+          class="text-sm">favorite</mat-icon>Eliminar de
+        favoritos
+      </button>
+      <p>{{restaurante.direccion}}</p> <!-- direccion -->
+      <p>{{restaurante.celular}}</p>
+      <p>{{restaurante.horario}}</p><!-- celular -->
+    </div>
+    <ul class="w-full text-start lg:flex-col flex justify-around lg:justify-start col-span-3	lg:col-span-1	">
+      <a class="hover:bg-orange-50 transition-all ease-in-out	duration-300	"
+        [ngClass]="{'bg-orange-50':categoria_inicial == categoria_seleccionada}"
+        (click)="actualizarProductos(0,categoria_inicial)">
+        <li class="my-2 mx-4 border-0 ">
+          {{categoria_inicial.nombre}}</li>
+        <mat-divider [ngClass]="{'border-t-orange-600': categoria_inicial == categoria_seleccionada}"></mat-divider>
+      </a>
+      <a class="hover:bg-orange-50 transition-all ease-in-out	duration-300	" *ngFor="let c of categorias"
+        [ngClass]="{'bg-orange-50':c == categoria_seleccionada}" (click)="actualizarProductos(c.id,c)">
+        <li class="my-2 mx-4 border-0 ">
+          {{c.nombre}}</li>
+        <mat-divider [ngClass]="{'border-t-orange-600':c == categoria_seleccionada}"></mat-divider>
+      </a>
+
+    </ul>
+  </div>
+
+  <div class="w-full">
+    <app-carousel [promociones]="promociones" [restaurante_nombre]="restaurante.nombre"
+      [restaurante_id]="id_restaurante"></app-carousel>
+    <app-grid [producto]="true" [items]="productos" [restaurante_nombre]="restaurante.nombre"
+      [restaurante_id]="id_restaurante"></app-grid>
+
+  </div>
+
+</div>
